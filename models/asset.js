@@ -1,21 +1,43 @@
+const mongoose = require("mongoose");
 
-const mongoose=require("mongoose");
+const assetSchema = new mongoose.Schema(
+{
+    name:{
+        type:String,
+        required:true
+    },
 
-const AssetSchema=new mongoose.Schema({
-    name:String,
-    category:String,
-    description:String,
+    category:{
+        type:String,
+        required:true
+    },
 
-    totalQuantity:Number,
+    description:{
+        type:String,
+        default:""
+    },
 
-    availableQuantity:Number,
+    totalQuantity:{
+        type:Number,
+        required:true,
+        min:0
+    },
+
+    availableQuantity:{
+        type:Number,
+        required:true,
+        min:0
+    },
 
     status:{
         type:String,
-        enum:["available","unavailable"]
+        enum:["Available","Limited","Out of Stock"],
+        default:"Available"
     }
-})
+},
+{
+    timestamps:true
+}
+);
 
-const Asset=mongoose.model('Asset',AssetSchema);
-
-module.exports={Asset};
+module.exports = mongoose.model("Asset",assetSchema);

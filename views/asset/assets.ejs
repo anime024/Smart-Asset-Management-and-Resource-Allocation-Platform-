@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Inventory</h1>
+
+<a href="/assets/create">
+    Add Asset
+</a>
+
+<form method="GET" action="/assets">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search asset"
+    >
+
+    <input
+        type="text"
+        name="category"
+        placeholder="Category"
+    >
+
+    <button>
+        Search
+    </button>
+
+</form>
+
+<hr>
+
+<% assets.forEach(asset => { %>
+
+<div>
+
+    <h3><%= asset.name %></h3>
+
+    <p><%= asset.category %></p>
+
+    <p>Total : <%= asset.totalQuantity %></p>
+
+    <p>Available : <%= asset.availableQuantity %></p>
+
+    <p>Status : <%= asset.status %></p>
+
+    <a href="/assets/edit/<%= asset._id %>">
+        Edit
+    </a>
+
+    <form
+        action="/assets/delete/<%= asset._id %>"
+        method="POST"
+    >
+        <button>
+            Delete
+        </button>
+    </form>
+
+</div>
+
+<hr>
+
+<% }) %>
+</body>
+</html>

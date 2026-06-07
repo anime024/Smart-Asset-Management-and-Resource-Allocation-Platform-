@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="/assets/edit/<%= asset._id %>">
+
+    <input name="name"  value="<%= asset.name %>">
+
+    <input name="category" value="<%= asset.category %>">
+
+    <textarea
+        name="description"
+    ></textarea>
+
+    <input
+        type="number"
+        name="totalQuantity"
+        value="<%= asset.totalQuantity %>"
+    >
+
+    <input
+        type="number"
+        name="availableQuantity"
+        value="<%= asset.availableQuantity %>"
+    >
+
+    
+
+    <button>
+        Create
+    </button>
+
+</form>
+</body>
+</html>
