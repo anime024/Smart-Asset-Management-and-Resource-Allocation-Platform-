@@ -4,7 +4,7 @@ const {checkAuth}=require('../middlewares/checkAuth')
 const {restrictTo}=require('../middlewares/restrictTo')
 
 
-const router = express.Router();
+const assetRouter = express.Router();
 
 const {
     handleGetAssets,
@@ -12,17 +12,18 @@ const {
     handlePostCreateAsset,
     handleGetEditAsset,
     handlePostEditAsset,
-    handlePostDeleteAsset
+    handlePostDeleteAsset,
+    handleGetSingleAsset
 } = require("../controllers/assetController");
 
-router.get("/assets",checkAuth,handleGetAssets);
 
-router.get("/assets/create",checkAuth,restrictTo(["admin"]),handleGetCreateAsset);
-router.post("/assets/create",checkAuth,restrictTo(["admin"]),handlePostCreateAsset);
+assetRouter.get("/assets/create",checkAuth,restrictTo(["admin"]),handleGetCreateAsset);
+assetRouter.post("/assets/create",checkAuth,restrictTo(["admin"]),handlePostCreateAsset);
 
-router.get("/assets/edit/:id",checkAuth,restrictTo(["admin"]),handleGetEditAsset);
-router.post("/assets/edit/:id",checkAuth,restrictTo(["admin"]),handlePostEditAsset);
+assetRouter.get("/assets/edit/:id",checkAuth,restrictTo(["admin"]),handleGetEditAsset);
+assetRouter.post("/assets/edit/:id",checkAuth,restrictTo(["admin"]),handlePostEditAsset);
 
-router.post("/assets/delete/:id",checkAuth,restrictTo(["admin"]),handlePostDeleteAsset);
-
-module.exports = router;
+assetRouter.post("/assets/delete/:id",checkAuth,restrictTo(["admin"]),handlePostDeleteAsset);
+assetRouter.get('/assets/:id',checkAuth,handleGetSingleAsset);
+assetRouter.get("/assets",checkAuth,handleGetAssets);
+module.exports = {assetRouter};

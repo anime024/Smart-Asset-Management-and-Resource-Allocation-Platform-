@@ -40,4 +40,6 @@ const assetSchema = new mongoose.Schema(
 }
 );
 
-module.exports = mongoose.model("Asset",assetSchema);
+const Asset = mongoose.model("Asset",assetSchema);
+
+module.exports={Asset}

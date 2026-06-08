@@ -62,7 +62,7 @@ async function handlePostLogin(req, res) {
         role: user.role,
       };
 
-      if(req.session.user==='admin')
+      if(req.session.user.role==='admin')
       {
         return res.redirect('/admin/dashboard');
       }

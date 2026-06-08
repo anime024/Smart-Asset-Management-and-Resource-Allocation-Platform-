@@ -7,7 +7,11 @@ const {connectMongoDb}=require('./config/db')
 const path=require('path')
 const {authRouter}=require('./routes/authRoutes')
 const {userRouter}=require('./routes/userRoutes')
-const assetRoutes = require("./routes/assetRoutes");
+const {adminRouter}=require("./routes/adminRoutes")
+const {assetRouter} = require("./routes/assetRoutes");
+const {bookingRouter}=require('./routes/bookingRoutes')
+
+
 connectMongoDb();
 
 const app=express();
@@ -29,8 +33,11 @@ app.use(session({
 const PORT=8000
 
 app.use('/user',userRouter);
+app.use('/admin',adminRouter);
 app.use('/',authRouter)
-app.use("/",assetRoutes);
+app.use("/",assetRouter);
+app.use("/booking",bookingRouter);
+
 
 app.listen(PORT,()=>{
     console.log(`server started at http://localhost:${PORT}/`);

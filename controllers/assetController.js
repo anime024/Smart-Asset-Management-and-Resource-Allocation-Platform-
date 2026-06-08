@@ -1,4 +1,4 @@
-const Asset = require("../models/asset");
+const {Asset} = require("../models/asset");
 
 async function handleGetAssets(req,res){
 
@@ -23,6 +23,37 @@ async function handleGetAssets(req,res){
         assets
     });
 }
+
+
+async function handleGetSingleAsset(req,res) {
+
+    const asset=await Asset.findById(req.params.id);
+    
+    if(!assset){
+        return res.redirect('/assets?msg=no asset found');
+    }
+
+    console.log("assset is ",asset)
+
+    return res.render("asset/singleAsset",{asset});
+
+
+
+}
+
+async function handleGetSingleAsset(req,res){
+    const asset=await Asset.findById(req.params.id);
+
+    if(!asset)
+    {
+        return res.redirect('/assets?msg=no asset found ')
+    }
+
+    return res.render("asset/assetDetails",{asset});
+}
+
+
+
 
 function handleGetCreateAsset(req,res){
     res.render("asset/createAsset");
@@ -116,5 +147,6 @@ module.exports = {
     handlePostCreateAsset,
     handleGetEditAsset,
     handlePostEditAsset,
-    handlePostDeleteAsset
+    handlePostDeleteAsset,
+    handleGetSingleAsset
 };

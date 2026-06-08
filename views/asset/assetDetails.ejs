@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2><%= asset.name %></h2>
+
+<p>
+Available:
+<%= asset.availableQuantity %>
+</p>
+
+<form action="/booking/create/<%= asset._id %>" method="POST">
+
+<input
+type="number"
+name="quantity"
+min="1"
+required
+/>
+
+<button>
+Request Asset
+</button>
+
+</form>
+</body>
+</html>

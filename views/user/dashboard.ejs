@@ -8,5 +8,39 @@
 <body>
     Hii User
     <a href="/user/logout">LogOut</a>
+    <a href="/assets">Assets here </a>
+
+    <h2>My Requests</h2>
+
+<table>
+
+<tr>
+<th>Asset</th>
+<th>Quantity</th>
+<th>Status</th>
+</tr>
+
+<% bookings.forEach(booking=>{ %>
+
+<tr>
+
+<td>
+<%= booking.asset.name %>
+</td>
+
+<td>
+<%= booking.quantity %>
+</td>
+
+<td>
+<%= booking.status %>
+</td>
+
+</tr>
+
+<% }) %>
+
+</table>
+
 </body>
 </html>

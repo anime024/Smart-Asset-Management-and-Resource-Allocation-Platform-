@@ -22,10 +22,10 @@ const BookingSchema=new mongoose.Schema({
 
     status:{
         type:String,
-        enum:["pending","approved","rejected","returned"],
+        enum:["issued","pending","approved","rejected","returned"],
         default:"pending"
     }
-})
+},{timestamps:true})
 
 const Booking=mongoose.model('Booking',BookingSchema);
 
