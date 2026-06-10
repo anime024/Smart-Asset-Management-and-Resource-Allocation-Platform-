@@ -30,6 +30,11 @@ app.use(session({
     cookie:{maxAge:60*1000*10}
 }))
 
+app.use((req,res,next)=>{
+    res.locals.user = req.session.user;
+    next();
+});
+
 const PORT=8000
 
 app.use('/user',userRouter);

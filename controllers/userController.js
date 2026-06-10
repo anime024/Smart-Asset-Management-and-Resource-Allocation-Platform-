@@ -19,4 +19,15 @@ function handleUserLogout(req, res) {
   return res.redirect("/?msg=Log Out Succesfull");
 }
 
-module.exports = { handleUserDashboard, handleUserLogout };
+async function handleGetHistory(req,res){
+
+    const bookings=await Booking.find({
+        user:req.session.user._id
+    }).populate("asset");
+
+    res.render("user/history",{
+        bookings
+    });
+}
+
+module.exports = { handleUserDashboard, handleUserLogout,handleGetHistory };

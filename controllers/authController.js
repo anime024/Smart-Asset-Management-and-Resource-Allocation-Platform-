@@ -72,10 +72,19 @@ async function handlePostLogin(req, res) {
   });
 }
 
+function handleUserLogout(req, res) {
+  req.session.destroy(function (err) {
+    if (err) return res.json({ message: "PROBLEM IN LOGOUT " });
+  });
+
+  return res.redirect("/?msg=Log Out Succesfull");
+}
+
 module.exports = {
   handleHomePage,
   handleGetLogin,
   handleGetSignup,
   handlePostLogin,
   handlePostSignup,
+  handleUserLogout
 };

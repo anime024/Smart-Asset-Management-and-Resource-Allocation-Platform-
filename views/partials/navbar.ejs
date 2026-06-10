@@ -1,0 +1,90 @@
+
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.navbar{
+    background:#1f2937;
+    color:white;
+    padding:15px 40px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo a{
+    color:white;
+    text-decoration:none;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#60a5fa;
+}
+</style>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        <a href="/">AssetHub</a>
+    </div>
+
+    <ul class="nav-links">
+
+        <% if(user){ %>
+
+            <% if(user.role === "admin"){ %>
+
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+
+                <li><a href="/assets">Assets</a></li>
+
+                <li><a href="/admin/bookings">Bookings</a></li>
+
+                <li><a href="/logout">Logout</a></li>
+
+            <% } else { %>
+
+                <li><a href="/assets">Browse Assets</a></li>
+
+                <li><a href="/user/history">My Requests</a></li>
+
+                <li><a href="/logout">Logout</a></li>
+
+            <% } %>
+
+        <% } else { %>
+
+            <li><a href="/login">Login</a></li>
+
+            <li><a href="/signup">Signup</a></li>
+
+        <% } %>
+
+    </ul>
+
+</nav>

@@ -6,10 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    Hiiiii admin
-    <%= user %>
+    <% if (user) { %>
+     
+        <%- include("../partials/navbar") %>    
+    <% } %>
+
+    <a href="/assets/create">Create Asset </a>
+
+    <a href="/admin/bookings">Requests</a>
 
         <a href="/user/logout">LogOut</a>
+
 
 </body>
 </html>

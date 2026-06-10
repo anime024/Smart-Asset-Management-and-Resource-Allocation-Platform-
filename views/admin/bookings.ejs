@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Bookings</title>
+</head>
+<body>
+
+    <% if (user) { %>
+     
+        <%- include("../partials/navbar") %>    
+    <% } %>
+
+<h1>Manage Bookings</h1>
+
+<table border="1">
+
+    <tr>
+        <th>User</th>
+        <th>Asset</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    <% bookings.forEach(booking => { %>
+
+    <tr>
+
+        <td><%= booking.user.name %></td>
+
+        <td><%= booking.asset.name %></td>
+
+        <td><%= booking.quantity %></td>
+
+        <td><%= booking.status %></td>
+
+        <td>
+
+            <% if(booking.status === "pending"){ %>
+
+                <form action="/admin/bookings/approve/<%= booking._id %>" method="POST" style="display:inline;">
+                    <button type="submit">Approve</button>
+                </form>
+
+                <form action="/admin/bookings/reject/<%= booking._id %>" method="POST" style="display:inline;">
+                    <button type="submit">Reject</button>
+                </form>
+
+            <% } %>
+
+
+            <% if(booking.status === "approved"){ %>
+
+                <form action="/admin/bookings/issue/<%= booking._id %>" method="POST">
+                    <button type="submit">Issue Asset</button>
+                </form>
+
+            <% } %>
+
+
+            <% if(booking.status === "issued"){ %>
+
+                <form action="/admin/bookings/return/<%= booking._id %>" method="POST">
+                    <button type="submit">Return Asset</button>
+                </form>
+
+            <% } %>
+
+
+            <% if(booking.status === "rejected"){ %>
+                Rejected
+            <% } %>
+
+            <% if(booking.status === "returned"){ %>
+                Returned
+            <% } %>
+
+        </td>
+
+    </tr>
+
+    <% }) %>
+
+</table>
+
+</body>
+</html>

@@ -6,10 +6,12 @@
     <title>User Dashboard</title>
 </head>
 <body>
-    Hii User
-    <a href="/user/logout">LogOut</a>
-    <a href="/assets">Assets here </a>
-
+    <% if (user) { %>
+     
+        <%- include("../partials/navbar") %>    
+    <% } %>
+   <h1>Hii <%= user.name %></h1>
+    
     <h2>My Requests</h2>
 
 <table>

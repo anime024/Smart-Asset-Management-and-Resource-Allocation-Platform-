@@ -1,4 +1,5 @@
 const express = require("express");
+const {checkAuth}=require('../middlewares/checkAuth')
 
 const {
   handleHomePage,
@@ -6,6 +7,7 @@ const {
   handleGetSignup,
   handlePostLogin,
   handlePostSignup,
+  handleUserLogout
 } = require("../controllers/authController");
 
 const authRouter = express.Router();
@@ -15,5 +17,6 @@ authRouter.get("/login", handleGetLogin);
 authRouter.get("/signup", handleGetSignup);
 authRouter.post("/login", handlePostLogin);
 authRouter.post("/signup", handlePostSignup);
+authRouter.get('/logout',checkAuth,handleUserLogout)
 
 module.exports = { authRouter };

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <% if (user) { %>
+     
+        <%- include("../partials/navbar") %>    
+    <% } %>
+    <h2>Current Requests</h2>
+
+<table border="1">
+
+<tr>
+    <th>Asset</th>
+    <th>Quantity</th>
+    <th>Status</th>
+</tr>
+
+<% bookings.forEach(booking=>{ %>
+
+<% if(
+booking.status==="pending" ||
+booking.status==="approved" ||
+booking.status==="issued"
+){ %>
+
+<tr>
+<td><%= booking.asset.name %></td>
+<td><%= booking.quantity %></td>
+<td><%= booking.status %></td>
+</tr>
+
+<% } %>
+
+<% }) %>
+
+</table>
+
+<h2>Returned Assets</h2>
+
+<table border="1">
+
+<tr>
+    <th>Asset</th>
+    <th>Quantity</th>
+    <th>Status</th>
+</tr>
+
+<% bookings.forEach(booking=>{ %>
+
+<% if(booking.status==="returned"){ %>
+
+<tr>
+<td><%= booking.asset.name %></td>
+<td><%= booking.quantity %></td>
+<td>Returned</td>
+</tr>
+
+<% } %>
+
+<% }) %>
+
+</table>
+
+<h2>All Requests</h2>
+
+<table border="1">
+
+<tr>
+    <th>Asset</th>
+    <th>Quantity</th>
+    <th>Status</th>
+</tr>
+
+<% bookings.forEach(booking=>{ %>
+
+<tr>
+<td><%= booking.asset.name %></td>
+<td><%= booking.quantity %></td>
+<td><%= booking.status %></td>
+</tr>
+
+<% }) %>
+
+</table>
+</body>
+</html>
