@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 
 
 function handleHomePage(req, res) {
-  return res.render("home", { message: null });
+  const message=req.query.msg||null;
+  return res.render("home", { message});
 }
 
 function handleGetLogin(req, res) {

@@ -3,37 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Asset</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f5f6fa;
+        }
+
+        .container{
+            max-width:700px;
+            margin:40px auto;
+            padding:20px;
+        }
+
+        .form-card{
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .form-card h1{
+            color:#273c75;
+            margin-bottom:25px;
+            text-align:center;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:6px;
+            font-weight:bold;
+            color:#333;
+        }
+
+        input,
+        textarea,
+        select{
+            width:100%;
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:8px;
+            font-size:15px;
+        }
+
+        textarea{
+            resize:vertical;
+            min-height:100px;
+        }
+
+        button{
+            width:100%;
+            background:#273c75;
+            color:white;
+            border:none;
+            padding:12px;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#192a56;
+        }
+    </style>
 </head>
+
 <body>
-    <form method="POST" action="/assets/edit/<%= asset._id %>">
 
-    <input name="name"  value="<%= asset.name %>">
+    <%- include("../partials/navbar") %>
 
-    <input name="category" value="<%= asset.category %>">
+    <div class="container">
 
-    <textarea
-        name="description"
-    ></textarea>
+        <div class="form-card">
 
-    <input
-        type="number"
-        name="totalQuantity"
-        value="<%= asset.totalQuantity %>"
-    >
+            <h1>Edit Asset</h1>
 
-    <input
-        type="number"
-        name="availableQuantity"
-        value="<%= asset.availableQuantity %>"
-    >
+            <form method="POST">
 
-    
+                <div class="form-group">
+                    <label>Asset Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value="<%= asset.name %>"
+                        required
+                    >
+                </div>
 
-    <button>
-        Create
-    </button>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input
+                        type="text"
+                        name="category"
+                        value="<%= asset.category %>"
+                        required
+                    >
+                </div>
 
-</form>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea
+                        name="description"
+                    ><%= asset.description %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Total Quantity</label>
+                    <input
+                        type="number"
+                        name="totalQuantity"
+                        min="0"
+                        value="<%= asset.totalQuantity %>"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Available Quantity</label>
+                    <input
+                        type="number"
+                        name="availableQuantity"
+                        min="0"
+                        value="<%= asset.availableQuantity %>"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+
+                    <select name="status">
+
+                        <option
+                            value="Available"
+                            <%= asset.status === "Available" ? "selected" : "" %>>
+                            Available
+                        </option>
+
+                        <option
+                            value="Limited"
+                            <%= asset.status === "Limited" ? "selected" : "" %>>
+                            Limited
+                        </option>
+
+                        <option
+                            value="Out of Stock"
+                            <%= asset.status === "Out of Stock" ? "selected" : "" %>>
+                            Out of Stock
+                        </option>
+
+                    </select>
+                </div>
+
+                <button type="submit">
+                    Update Asset
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </body>
 </html>

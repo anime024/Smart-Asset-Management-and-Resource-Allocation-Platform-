@@ -1,20 +1,74 @@
 const { Asset } = require("../models/asset");
-const {Booking}=require("../models/booking")
+const {Booking}=require("../models/booking");
+const {User}=require('../models/user')
 const mongoose=require("mongoose")
 
 
-function handleAdminDashboard(req,res){
-    let message=req.params.msg||null;
-    const user=req.session.user;
-    console.log("user ",user)
-    return res.render('admin/dashboard',{message,user})
-}
+async function handleAdminDashboard(req,res){
 
+    const totalAssets = await Asset.countDocuments();
+
+    const totalUsers = await User.countDocuments({
+        role:"user"
+    });
+
+    const pendingRequests = await Booking.countDocuments({
+        status:"pending"
+    });
+
+    const activeAllocations = await Booking.countDocuments({
+        status:"issued"
+    });
+
+    const overdueBookings = await Booking.find({
+        status:"issued",
+        endDate:{ $lt:new Date() }
+    }).populate("user asset");
+
+    const mostUsedAssets = await Booking.aggregate([
+    {
+        $group:{
+            _id:"$asset",
+            count:{ $sum:1 }
+        }
+    },
+    {
+        $sort:{ count:-1 }
+    },
+    {
+        $limit:5
+    }
+]);
+await Asset.populate(mostUsedAssets,{
+    path:"_id"
+});
+
+const categoryData = await Asset.aggregate([
+{
+    $group:{
+        _id:"$category",
+        count:{ $sum:1 }
+    }
+}
+]);
+
+    res.render("admin/dashboard",{
+        totalAssets,
+        totalUsers,
+        pendingRequests,
+        activeAllocations,
+        overdueBookings,
+        mostUsedAssets,
+        categoryData
+    });
+}
 async function handleGetBookingsPage(req,res){
 
      const bookings = await Booking.find()
         .populate("user")
-        .populate("asset");
+        .populate("asset")
+        .sort({ createdAt: -1 });
+        
 
     res.render("admin/bookings",{
         bookings

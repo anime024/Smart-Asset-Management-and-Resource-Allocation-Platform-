@@ -1,4 +1,9 @@
 # Smart Asset Management and Resource Allocation Platform
+![Node.js](https://img.shields.io/badge/Node.js-Backend-green)
+![Express.js](https://img.shields.io/badge/Express.js-Framework-black)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-green)
+![EJS](https://img.shields.io/badge/EJS-Frontend-orange)
+
 A full-stack asset management platform that enables organizations to efficiently track inventory, manage resource allocation, handle booking approvals, and monitor asset utilization through an intuitive dashboard.
 
 ---
@@ -17,6 +22,7 @@ A full-stack asset management platform that enables organizations to efficiently
 * [Workflow](#workflow)
 * [Key Functionalities](#key-functionalities)
 * [Dashboard Analytics](#dashboard-analytics)
+* [Screenshots](#screenshots)
 * [Future Enhancements](#future-enhancements)
 * [Author](#author)
 
@@ -343,6 +349,23 @@ The platform provides visual insights through:
   * Inventory Distribution
 
 These analytics help administrators make informed resource allocation decisions.
+
+---
+
+## Screenshots
+
+### User Dashboard
+![User Dashboard](screenshots/user-dashboard.png)
+
+### Booking Request Workflow
+![Booking Request](screenshots/booking-request.png)
+
+### Admin Booking Management
+![Admin Booking Management](screenshots/admin-bookings.png)
+
+### Analytics Dashboard
+![Analytics Dashboard](screenshots/admin-dashboard.png)
+
 
 ---
 

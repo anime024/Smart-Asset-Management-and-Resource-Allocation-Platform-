@@ -1,6 +1,6 @@
 
 <style>
-    *{
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -11,41 +11,76 @@ body{
     background:#f4f6f9;
 }
 
+/* Navbar */
 .navbar{
-    background:#1f2937;
+    background:#273c75;
     color:white;
-    padding:15px 40px;
+    padding:16px 50px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
+
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
 .logo a{
     color:white;
     text-decoration:none;
     font-size:24px;
-    font-weight:bold;
+    font-weight:700;
+    letter-spacing:1px;
 }
 
 .nav-links{
     display:flex;
+    align-items:center;
     list-style:none;
-    gap:20px;
+    gap:15px;
+}
+
+.nav-links li{
+    list-style:none;
 }
 
 .nav-links a{
     color:white;
     text-decoration:none;
-    font-size:16px;
-    transition:0.3s;
+    padding:8px 14px;
+    border-radius:6px;
+    transition:0.3s ease;
+    font-size:15px;
+    font-weight:500;
 }
 
 .nav-links a:hover{
-    color:#60a5fa;
+    background:rgba(255,255,255,0.15);
+}
+
+/* Special logout button */
+.nav-links a[href="/logout"]{
+    background:#dc3545;
+}
+
+.nav-links a[href="/logout"]:hover{
+    background:#c82333;
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
 }
 </style>
-
 
 <nav class="navbar">
 
@@ -53,7 +88,13 @@ body{
         <a href="/">AssetHub</a>
     </div>
 
+    <div style="display:flex; align-items:center; gap:20px;"> 
     <ul class="nav-links">
+        <% if(user){ %>
+        <span style="color:#dbeafe;">
+            Welcome, <%= user.name %>
+        </span>
+    <% } %>
 
         <% if(user){ %>
 
@@ -68,7 +109,8 @@ body{
                 <li><a href="/logout">Logout</a></li>
 
             <% } else { %>
-
+                 <li><a href="/user/dashboard">Dashboard</a></li>
+                 
                 <li><a href="/assets">Browse Assets</a></li>
 
                 <li><a href="/user/history">My Requests</a></li>
@@ -86,5 +128,5 @@ body{
         <% } %>
 
     </ul>
-
+</div>
 </nav>

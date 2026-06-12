@@ -22,7 +22,6 @@ app.set('view engine','ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-console.log("SESSION_SECRET =", process.env.SESSION_SECRET);
 app.use(session({
     secret:process.env.SESSION_SECRET,
     resave:false,
@@ -35,7 +34,7 @@ app.use((req,res,next)=>{
     next();
 });
 
-const PORT=8000
+const PORT=process.env.PORT||8000
 
 app.use('/user',userRouter);
 app.use('/admin',adminRouter);

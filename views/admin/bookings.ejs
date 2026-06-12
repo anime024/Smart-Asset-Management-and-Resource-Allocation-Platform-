@@ -4,86 +4,236 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Bookings</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f5f6fa;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:30px auto;
+            padding:20px;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        h1{
+            color:#273c75;
+            margin-bottom:20px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:#273c75;
+            color:white;
+            padding:14px;
+            text-align:left;
+        }
+
+        td{
+            padding:14px;
+            border-bottom:1px solid #ddd;
+        }
+
+        tr:hover{
+            background:#f8f9fa;
+        }
+
+        .status{
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:13px;
+            font-weight:bold;
+        }
+
+        .pending{
+            background:#fff3cd;
+            color:#856404;
+        }
+
+        .approved{
+            background:#d4edda;
+            color:#155724;
+        }
+
+        .issued{
+            background:#cce5ff;
+            color:#004085;
+        }
+
+        .returned{
+            background:#d1ecf1;
+            color:#0c5460;
+        }
+
+        .rejected{
+            background:#f8d7da;
+            color:#721c24;
+        }
+
+        .action-group{
+            display:flex;
+            gap:8px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            border:none;
+            padding:8px 14px;
+            border-radius:6px;
+            color:white;
+            cursor:pointer;
+            font-size:14px;
+        }
+
+        .approve{
+            background:#28a745;
+        }
+
+        .reject{
+            background:#dc3545;
+        }
+
+        .issue{
+            background:#007bff;
+        }
+
+        .return{
+            background:#17a2b8;
+        }
+
+        .done{
+            font-weight:bold;
+            color:#666;
+        }
+
+        @media(max-width:768px){
+            table{
+                display:block;
+                overflow-x:auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <% if (user) { %>
-     
-        <%- include("../partials/navbar") %>    
+        <%- include("../partials/navbar") %>
     <% } %>
 
-<h1>Manage Bookings</h1>
+    <div class="container">
 
-<table border="1">
+        <div class="card">
 
-    <tr>
-        <th>User</th>
-        <th>Asset</th>
-        <th>Quantity</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
+            <h1>Manage Bookings</h1>
 
-    <% bookings.forEach(booking => { %>
+            <table>
 
-    <tr>
+                <tr>
+                    <th>User</th>
+                    <th>Asset</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
 
-        <td><%= booking.user.name %></td>
+                <% bookings.forEach(booking => { %>
 
-        <td><%= booking.asset.name %></td>
+                <tr>
 
-        <td><%= booking.quantity %></td>
+                    <td><%= booking.user.name %></td>
 
-        <td><%= booking.status %></td>
+                    <td><%= booking.asset.name %></td>
 
-        <td>
+                    <td><%= booking.quantity %></td>
 
-            <% if(booking.status === "pending"){ %>
+                    <td>
+                        <span class="status <%= booking.status %>">
+                            <%= booking.status %>
+                        </span>
+                    </td>
 
-                <form action="/admin/bookings/approve/<%= booking._id %>" method="POST" style="display:inline;">
-                    <button type="submit">Approve</button>
-                </form>
+                    <td>
 
-                <form action="/admin/bookings/reject/<%= booking._id %>" method="POST" style="display:inline;">
-                    <button type="submit">Reject</button>
-                </form>
+                        <div class="action-group">
 
-            <% } %>
+                            <% if(booking.status === "pending"){ %>
 
+                                <form action="/admin/bookings/approve/<%= booking._id %>" method="POST">
+                                    <button class="btn approve" type="submit">
+                                        Approve
+                                    </button>
+                                </form>
 
-            <% if(booking.status === "approved"){ %>
+                                <form action="/admin/bookings/reject/<%= booking._id %>" method="POST">
+                                    <button class="btn reject" type="submit">
+                                        Reject
+                                    </button>
+                                </form>
 
-                <form action="/admin/bookings/issue/<%= booking._id %>" method="POST">
-                    <button type="submit">Issue Asset</button>
-                </form>
-
-            <% } %>
-
-
-            <% if(booking.status === "issued"){ %>
-
-                <form action="/admin/bookings/return/<%= booking._id %>" method="POST">
-                    <button type="submit">Return Asset</button>
-                </form>
-
-            <% } %>
+                            <% } %>
 
 
-            <% if(booking.status === "rejected"){ %>
-                Rejected
-            <% } %>
+                            <% if(booking.status === "approved"){ %>
 
-            <% if(booking.status === "returned"){ %>
-                Returned
-            <% } %>
+                                <form action="/admin/bookings/issue/<%= booking._id %>" method="POST">
+                                    <button class="btn issue" type="submit">
+                                        Issue Asset
+                                    </button>
+                                </form>
 
-        </td>
+                            <% } %>
 
-    </tr>
 
-    <% }) %>
+                            <% if(booking.status === "issued"){ %>
 
-</table>
+                                <form action="/admin/bookings/return/<%= booking._id %>" method="POST">
+                                    <button class="btn return" type="submit">
+                                        Return Asset
+                                    </button>
+                                </form>
+
+                            <% } %>
+
+
+                            <% if(booking.status === "rejected"){ %>
+                                <span class="done">Rejected</span>
+                            <% } %>
+
+                            <% if(booking.status === "returned"){ %>
+                                <span class="done">Returned</span>
+                            <% } %>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <% }) %>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </body>
 </html>

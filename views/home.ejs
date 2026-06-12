@@ -3,10 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Asset Management System</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f5f6fa;
+            min-height:100vh;
+            color:#333;
+        }
+
+        .hero{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            height:80vh;
+            padding:20px;
+        }
+
+        .hero h1{
+            font-size:3rem;
+            margin-bottom:15px;
+            color:#2f3640;
+        }
+
+        .hero p{
+            font-size:1.1rem;
+            color:#666;
+            max-width:600px;
+            margin-bottom:30px;
+        }
+
+        .btn{
+            text-decoration:none;
+            background:#273c75;
+            color:white;
+            padding:12px 28px;
+            border-radius:8px;
+            transition:0.3s;
+            font-weight:bold;
+        }
+
+        .btn:hover{
+            background:#192a56;
+        }
+        .alert{
+    width:90%;
+    max-width:700px;
+    margin:20px auto;
+    padding:14px 20px;
+    background:#d4edda;
+    color:#155724;
+    border-left:5px solid #28a745;
+    border-radius:8px;
+    font-weight:500;
+}
+    </style>
 </head>
 <body>
-    <H1>HOME</H1>
-    <a href="/login">Login Here</a>
+
+    <%- include("./partials/navbar") %>
+    <% if(message){ %>
+    <div class="alert">
+        <%= message %>
+    </div>
+<% } %>
+
+    <section class="hero">
+        <h1>Asset Lifecycle Management System</h1>
+
+        <p>
+            Manage assets, bookings, approvals, issues, returns,
+            and lifecycle tracking through a centralized dashboard.
+        </p>
+
+        <a href="/login" class="btn">Login</a>
+    </section>
+
 </body>
 </html>
