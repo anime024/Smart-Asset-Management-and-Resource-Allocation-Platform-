@@ -11,6 +11,7 @@ A full-stack asset management platform that enables organizations to efficiently
 ## Table of Contents
 
 * [Overview](#overview)
+* [Demo Video](#demo-video)
 * [Highlights](#highlights)
 * [Features](#features)
 * [Tech Stack](#tech-stack)
@@ -35,7 +36,11 @@ Organizations often struggle with managing shared resources due to fragmented co
 The system supports role-based workflows for administrators and users while maintaining accurate inventory records throughout the asset lifecycle.
 
 ---
+## Demo Video
 
+ [Watch on YouTube](https://youtu.be/mBnUfiTOJYI)
+
+---
 ## Highlights
 
 - Role-based access control (Admin/User)
