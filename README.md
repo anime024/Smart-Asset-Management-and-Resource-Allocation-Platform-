@@ -357,7 +357,7 @@ These analytics help administrators make informed resource allocation decisions.
 ### User Dashboard
 ![User Dashboard](screenshots/user-dashboard.png)
 
-### Booking Request Workflow
+### Booking Request 
 ![Booking Request](screenshots/booking-request.png)
 
 ### Admin Booking Management
