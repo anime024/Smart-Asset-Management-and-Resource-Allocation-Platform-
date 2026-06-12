@@ -170,7 +170,7 @@ Authentication   Asset Management
 ## Project Structure
 
 ```bash
-project-root/
+Smart-Asset-Management-and-Resource-Allocation-Platform-/
 │
 ├── config/
 ├── controllers/
