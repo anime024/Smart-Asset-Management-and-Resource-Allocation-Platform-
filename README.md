@@ -172,11 +172,12 @@ Authentication   Asset Management
 ```bash
 project-root/
 │
+├── config/
 ├── controllers/
+├── middleware/
 ├── models/
 ├── routes/
-├── middleware/
-├── config/
+├── screenshots/
 ├── services/
 ├── utils/
 │
